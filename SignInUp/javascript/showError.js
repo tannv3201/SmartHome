@@ -5,7 +5,7 @@ const form = document.querySelector(".signup form"),
 form.onsubmit = (e) => {
     e.preventDefault(); // đếm số lần bấm
 }
-
+var testemail = /^\w+@\w+\.com$/i;
 signupBtn.onclick = () => {
     // Ajax
     let xhr = new XMLHttpRequest(); // create XML Object

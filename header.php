@@ -47,6 +47,7 @@
                 <div class="collapse navbar-collapse" id="navbarCollapse">
                     <div class="navbar-nav ms-auto">
                         <a href="index.php" class="nav-item nav-link">Trang chủ</a>
+                        <a href="all_home.php" class="nav-item nav-link">Căn hộ</a>
                         <a href="about.php" class="nav-item nav-link">Chúng tôi</a>
                         <a href="tel:+84346785893" class="nav-item nav-link">Liên hệ</a>
                     </div>
