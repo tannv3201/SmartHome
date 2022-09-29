@@ -1,0 +1,16 @@
+<?php
+    include('connect_database/connect.php');
+    if(isset($_GET['id_user'])){
+        $id = $_GET['id_user'];
+    }
+    $sql = "Update tb_customer SET status = 3 Where id_customer = '$id'";
+    $res = mysqli_query($conn, $sql);
+    if($res==true){
+        // Nếu dúng thì xóa 
+        header("Location:customer.php");
+    }
+    else{
+        // Không xóa được thì chịu
+        header("Location:customer.php");
+    }
+?>
