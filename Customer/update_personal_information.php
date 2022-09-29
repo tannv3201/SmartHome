@@ -184,7 +184,7 @@
 
                         <div class="content-panel">
                             
-                            <form class="form-horizontal" method="POST" enctype="multipart/form-data">
+                            <form id="form-1" class="form-horizontal" method="POST" enctype="multipart/form-data">
                                 <fieldset class="fieldset">
                                     <h3 class="fieldset-title">Ảnh đại diện</h3>
                                     <div class="form-group avatar">                                       
@@ -200,9 +200,10 @@
                                     <h3 class="fieldset-title">Thông tin cá nhân</h3>
                                     <div class="form-group">
                                         <label class="col-md-2 col-sm-3 col-xs-12 control-label">Họ</label>
-                                        <div class="col-md-10 col-sm-9 col-xs-12">
-                                            <input name="firstName" type="text" class="form-control" value="<?php echo  $row2['firstName'] ?>">
-                                        </div>
+                                       
+                                            <input id="firstname" name="firstName" type="text" class="form-control" value="<?php echo  $row2['firstName'] ?>">
+                                       
+                                        <span class="form-message"></span>
                                         <label class="col-md-2 col-sm-3 col-xs-12 control-label">Tên</label>
                                         <div class="col-md-10 col-sm-9 col-xs-12">
                                             <input name="lastName" type="text" class="form-control" value="<?php echo  $row2['lastName'] ?>">
@@ -299,6 +300,22 @@
     
     <!-- Template Javascript -->
     <script src="js/main.js"></script>
+    <script src="js/validator.js"></script>
+    <script>
+        // Mong muốn
+        Validator({
+            form: '#form-1',
+            formGroupSelector: '.form-group',
+            errorSelector: '.form-message',
+            rules: [
+                Validator.isRequired('#firstname'),
+                Validator.isRequired('#email'),
+            ],
+            onSubmit: function (data) {
+                console.log(data);
+            }
+        });
+    </script>
     <?php
         if(isset($_SESSION['status']) && $_SESSION['status'] !='')
         {
