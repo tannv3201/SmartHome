@@ -181,9 +181,14 @@
                             </div>
                         <?php }?>                        
                 </div>
+                <br>
+                <div class="allhome"><button type="button" class="btn btn-primary"><a style="color:#FFF" href="all_home.php">Xem tất cả nhà</a></button> </div> 
+                <div style = "display:none" class="hide">
                 <?php
-                        include "page.php";
-                        ?>                
+                    include "page.php";
+                ?>             
+                </div>   
+                        
             </div>
             <br>
             <br>
@@ -238,9 +243,8 @@
            </div>
        </div>
        <!-- End Post -->
-      
-      <!-- Footer Start -->
-      <div class="container-fluid bg-dark text-white-50 footer pt-5 mt-5 wow fadeIn" data-wow-delay="0.1s">
+     <!-- Footer Start -->
+     <div class="container-fluid bg-dark text-white-50 footer pt-5 mt-5 wow fadeIn" data-wow-delay="0.1s">
             <div class="container py-5">
                 <div class="row g-5">
                 <div class="col-lg-6 col-md-6">

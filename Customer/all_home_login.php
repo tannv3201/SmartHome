@@ -143,7 +143,7 @@
                 <div class="tab-content">
                
                     <?php
-                    $item_per_page = !empty($_GET['per_page'])?$_GET['per_page']:6;
+                    $item_per_page = !empty($_GET['per_page'])?$_GET['per_page']:9;
                     $current_page = isset($_GET['page'])?$_GET['page']:1;
                     $offset = ($current_page - 1) * $item_per_page;
                     $sql1 = "SELECT * FROM tb_home WHERE status = 1 ORDER BY 'id_home' ASC  LIMIT " . $item_per_page . " OFFSET " . $offset;
@@ -176,13 +176,9 @@
                         <?php }?>                        
                 </div>
                 <br>
-                <br>
-                <div class="allhome"><button type="button" class="btn btn-primary"><a style="color:#FFF" href="all_home_login.php">Xem tất cả nhà</a></button> </div> 
-                <div style = "display:none" class="hide">
                 <?php
-                    include "../page.php";
-                ?>             
-                </div>                  
+                        include "../page.php";
+                        ?>                
             </div>
             <br>
             <br>
@@ -199,43 +195,6 @@
         <!-- Property List End -->
 
       <!-- Post -->
-        <br>
-        <br>
-        <div class="container-xxl py-5">
-           <div class="container">
-               <div class="text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 600px;">
-                   <h1 class="mb-3">Bài viết</h1>
-                   <p>Tập trung vào chất lượng công trình bằng cả trái tim và tạo ra sự vững tin cho khách hàng bằng hành động.</p>
-               </div>
-               <div class="owl-carousel testimonial-carousel wow fadeInUp" data-wow-delay="0.1s">
-                   <?php
-                    $sql = "SELECT * FROM `tb_post` limit 0,6";
-                    $qr = mysqli_query($conn, $sql);
-                    if ($qr) {
-                        while ($row = mysqli_fetch_assoc($qr)) {
-                    ?>
-                           <div class="testimonial-item bg-light rounded p-3">
-                               <div class="bg-white border rounded p-4">
-                                   <p><?= substr($row['postContent'], 0, 200) ?> ... </p> 
-                                   <a  href="./post_detail.php?id_post=<?=$row['id_post']?>">Đọc thêm</a>
-
-                                 
-                                   <div class="d-flex align-items-center">
-                                       <img class="img-fluid flex-shrink-0 rounded" src="../image/<?= $row['img_post'] ?>" style="width: 45px; height: 45px;">
-                                       <div class="ps-3">
-                                           <h5 style="display: flex;align-items:flex-start;" class="fw-bold mb-1"><?= $row['postTitle'] ?></h5>
-                                           <small style="display: flex;align-items:flex-start;">Profession</small>
-                                       </div>
-                                   </div>
-                               </div>
-                           </div>
-                   <?php
-                        }
-                    }
-                    ?>
-               </div>
-           </div>
-       </div>
        <!-- End Post -->
 
       <!-- Footer Start -->

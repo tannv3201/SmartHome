@@ -18,7 +18,7 @@
                 <div class="error-txt"></div>
                 <div class="field input">
                     <label>Địa chỉ email</label>
-                    <input type="text" name="email" placeholder="Nhập email" required>
+                    <input type="email" name="email" placeholder="Nhập email" required>
                 </div>
                 <div class="field input">
                     <label>Mật khẩu</label>
