@@ -17,7 +17,10 @@ include('header.php');
                 $id_home = $_POST['id_homee'];
                 $id_customer = $_POST['id_customer'];
                 $note = $_POST['note'];
-
+                if(empty($note)){
+                    $empty ?><h2 style="color:red" >Vui lòng nhập đầy đủ thông tin</h2><?php
+                }
+                else{
                 $sql3 = "INSERT INTO tb_contract(id_home, id_customer,id_staff, note, status) VALUES($id_home, $id_customer, $id_admin, '$note', 3)";
                 $res3 = mysqli_query($conn, $sql3);
 
@@ -29,6 +32,7 @@ include('header.php');
                 else{
                     header("Location:add_contract.php");
                 }
+            }
             }
 
             ?>

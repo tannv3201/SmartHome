@@ -134,6 +134,10 @@
                                 `birthday`='$birthday'                          
                                 WHERE `id_user`= '$iduser' ";
 
+            if(empty($firstname) || empty($lastname) || empty($phonenumber) || empty($address) || empty($birthday)){
+                $empty = "Vui lòng nhập đầy đủ thông tin";
+            }
+            else{
             $res1 = mysqli_query($conn, $sql1);
             if ($res1 == true) { 
                 
@@ -144,6 +148,7 @@
                     $_SESSION['status'] = "Cập nhật thông tin thất bại";
                     $_SESSION['status_code'] = "error";                
                  }
+            }
             }
             ?>    
 
@@ -198,6 +203,13 @@
                                     </div>
                                     </br></br>
                                     <h3 class="fieldset-title">Thông tin cá nhân</h3>
+                                    <?php
+                                        if(isset($empty)) {?>
+                                        <h4 style="color:red"> <?php echo $empty; ?> </h4>
+                                    <?php
+                                    }
+                                    ?>
+                                    
                                     <div class="form-group">
                                         <label class="col-md-2 col-sm-3 col-xs-12 control-label">Họ</label>
                                         <div class="col-md-10 col-sm-9 col-xs-12">
@@ -212,11 +224,11 @@
                                     <div class="form-group">
                                         <label class="col-md-2 col-sm-3 col-xs-12 control-label">Giới tính</label>
                                         <div class="col-md-10 col-sm-9 col-xs-12">
-                                            <input <?php if ( $row2['gender']  == 1) {
+                                            <input  <?php if ( $row2['gender']  == 1) {
                                                         echo "checked";
                                                     } ?> type="radio" name="gender" value="1">
                                             <label>Nam</label>
-                                            <input <?php if ( $row2['image']  == 0) {
+                                            <input  <?php if ( $row2['image']  == 0) {
                                                         echo "checked";
                                                     } ?> type="radio" name="gender" value="2">
                                             <label>Nữ</label>
@@ -225,7 +237,7 @@
                                     <div class="form-group">
                                         <label class="col-md-2 col-sm-3 col-xs-12 control-label">Ngày sinh</label>
                                         <div class="col-md-10 col-sm-9 col-xs-12">
-                                            <input name="birthday" type="date" class="form-control" value="<?php echo $row2['birthday']  ?>">
+                                            <input  name="birthday" type="date" class="form-control" value="<?php echo $row2['birthday']  ?>">
                                         </div>
                                     </div>
                                 </fieldset>
@@ -233,13 +245,13 @@
                                     <div class="form-group">
                                         <label class="col-md-2  col-sm-3 col-xs-12 control-label">Địa chỉ</label>
                                         <div class="col-md-10 col-sm-9 col-xs-12">
-                                            <input name="address" type="text" class="form-control" value="<?php echo  $row2['address']?>">
+                                            <input  name="address" type="text" class="form-control" value="<?php echo  $row2['address']?>">
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label class="col-md-2  col-sm-3 col-xs-12 control-label">Số điện thoại</label>
                                         <div class="col-md-10 col-sm-9 col-xs-12">
-                                            <input name="phoneNumber" type="text" class="form-control" value="<?php echo $row2['phoneNumber'] ?>">
+                                            <input  name="phoneNumber" type="text" class="form-control" value="<?php echo $row2['phoneNumber'] ?>">
                                         </div>
                                     </div>
 
@@ -298,14 +310,14 @@
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     
     <!-- Template Javascript -->
-    <script src="js/main.js"></script>
+    <script src="js/main.js">   </script>
     <?php
         if(isset($_SESSION['status']) && $_SESSION['status'] !='')
         {
             ?>
         <script> 
             Swal.fire({
-            icon: 'success',
+            icon: "<?php echo $_SESSION['status_code'];?>" ,
             title: "<?php echo $_SESSION['status'];?>" ,
             footer: '<a class="btn btn-success" href="personal_information.php?id_user=<?php echo $iduser ?>">Xong</a>',
             showConfirmButton: false,

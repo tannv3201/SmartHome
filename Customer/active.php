@@ -24,6 +24,44 @@
 
         <!-- Update Information personl -->
         <form method="POST" enctype="multipart/form-data">
+        <?php
+        if (isset($_POST['update'])) {
+           
+            $cardnumber = $_POST['cardNumber'];
+            $daterange = $_POST['dateRange'];
+            $isuseby = $_POST['isuseBy'];
+            $imagefront = $_FILES['imageFront']['name'];
+            if ($imagefront != null) {
+                $path = "../image/";
+                $tmp_name = $_FILES['imageFront']['tmp_name'];
+                move_uploaded_file($tmp_name,$path.$imagefront);
+            }
+            $imageback = $_FILES['imageBack']['name'];
+            if ($imageback != null) {
+                $path = "../image/";
+                $tmp_name = $_FILES['imageBack']['tmp_name'];
+                move_uploaded_file($tmp_name,$path.$imageback);
+            }
+            if($imagefront!= null && $imageback != null){
+            // Bước 2 câu lệnh truy vấn
+            $sql1 = "INSERT INTO `tb_customer`(`id_customer`, `cardNumber`, `dateRange`, `isuseBy`, `imageFront`, `imageBack`) 
+            VALUES ('$iduser','$cardnumber','$daterange',N'$isuseby','$imagefront','$imageback')";
+            $res1 = mysqli_query($conn, $sql1);
+            if ($res1 == true) { 
+                $slq11 = "UPDATE `tb_user` SET `status`= 1 WHERE id_user = $iduser";
+                $res11 = mysqli_query($conn, $slq11);
+                 $_SESSION['status'] = "Gửi yêu cầu xác thực thành công";
+                 $_SESSION['status_code'] = "success";
+               
+                } else { 
+                    $empty = "Vui lòng nhập đầy đủ thông tin";
+                 }
+            }
+            else{
+                $empty = "Vui lòng nhập đầy đủ thông tin";
+            }
+            }
+            ?>    
         <div class="main-content">
 
         <div class="container">
@@ -36,6 +74,12 @@
 
                         <div class="content-panel">
                                     <h3 class="fieldset-title">Thông tin cá nhân</h3>
+                                    <?php
+                                        if(isset($empty)) {?>
+                                        <h6 style="color:red"> <?php echo $empty; ?> </h6>
+                                    <?php
+                                    }
+                                    ?>
                                     <div class="form-group">
                                         <label class="col-md-2 col-sm-3 col-xs-12 control-label">Số ID</label>
                                         <div class="col-md-6 col-sm-9 col-xs-12">
@@ -78,46 +122,7 @@
             </div>
         </div>
         </div>
-        <?php
-        if (isset($_POST['update'])) {
-           
-            $cardnumber = $_POST['cardNumber'];
-            $daterange = $_POST['dateRange'];
-            $isuseby = $_POST['isuseBy'];
-            $imagefront = $_FILES['imageFront']['name'];
-            if ($imagefront != null) {
-                $path = "../image/";
-                $tmp_name = $_FILES['imageFront']['tmp_name'];
-                move_uploaded_file($tmp_name,$path.$imagefront);
-            }
-            $imageback = $_FILES['imageBack']['name'];
-            if ($imageback != null) {
-                $path = "../image/";
-                $tmp_name = $_FILES['imageBack']['tmp_name'];
-                move_uploaded_file($tmp_name,$path.$imageback);
-            }
-            if($imagefront!= null && $imageback != null){
-            // Bước 2 câu lệnh truy vấn
-            $sql1 = "INSERT INTO `tb_customer`(`id_customer`, `cardNumber`, `dateRange`, `isuseBy`, `imageFront`, `imageBack`) 
-            VALUES ('$iduser','$cardnumber','$daterange',N'$isuseby','$imagefront','$imageback')";
-            $res1 = mysqli_query($conn, $sql1);
-            if ($res1 == true) { 
-                $slq11 = "UPDATE `tb_user` SET `status`= 1 WHERE id_user = $iduser";
-                $res11 = mysqli_query($conn, $slq11);
-                 $_SESSION['status'] = "Gửi yêu cầu xác thực thành công";
-                 $_SESSION['status_code'] = "success";
-               
-                } else { 
-                    $_SESSION['status'] = "Gửi yêu xác thực thất bại";
-                    $_SESSION['status_code'] = "error";
-                 }
-            }
-            else{
-                $_SESSION['status'] = "Gửi yêu xác thực thất bại";
-                $_SESSION['status_code'] = "error";
-            }
-            }
-            ?>    
+       
         </form>
         <!-- End Update Information personl -->
 
