@@ -133,7 +133,10 @@ include('header.php');
                 $image10 = null;
             }
 
-
+            if(empty($id_typeHome) || empty($nameHome) || empty($price) || empty($sale) || empty($area) || empty($address) || empty($room) || empty($bed) || empty($bath) || empty($image_name) || empty($image_name2) || empty($image_name3)){
+                $empty ?><h2 style="color:red" >Vui lòng nhập đầy đủ thông tin</h2><?php
+            }
+            else{
 
             $sql2 = "UPDATE tb_home SET name_home = '$name_home1', price = '$price1', priceSale = '$priceSale1', area_home = '$area1', address_home = '$address1', 
                             numberRoom = '$room1', numberBedRoom = '$bedRoom1', numberBathRoom = '$bathRoom1', description = '$des1', image1 = '$image6', image2 = '$image7', image3 = '$image8',  image4 = '$image9', image5 = '$image10' WHERE id_home = $id_home ";
@@ -143,6 +146,7 @@ include('header.php');
             } else {
                 header("Location:view_home.php");
             }
+        }
         }
         ?>
         <div class="inputBox">

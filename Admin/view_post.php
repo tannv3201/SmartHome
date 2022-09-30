@@ -46,6 +46,10 @@ include('header.php');
                 } else {
                     $image_name = "typeHome_default.jpg";
                 }
+                if(empty($title) || empty($content) || empty($image_name) || empty($id_admin)){
+                    $empty ?><h2 style="color:red" >Vui lòng nhập đầy đủ thông tin</h2><?php
+                }
+                else{
                 $sql1 = "Update tb_post Set postTitle = '$title', postContent = '$content', img_post = '$image_name', idWriter = $id_admin where id_post = $id_post";
                 $res1 = mysqli_query($conn, $sql1);
                 if ($res1 == TRUE) {
@@ -54,6 +58,7 @@ include('header.php');
 
                     header("Location:view_post.php");
                 }
+            }
             }
         ?>
         <div class="inputBox">

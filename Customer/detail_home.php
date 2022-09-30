@@ -1,5 +1,7 @@
 <?php
     include('header.php');
+    $id_homecheck = $_GET['id_home'];
+    
 ?>
 
 <head>
@@ -157,7 +159,8 @@
                                         <span class="dropdown-item" style="color: red; font-style: italic;">Lưu ý: Xác thực tài khoản để có thể yêu cầu đặt cọc</span>       
                                         <?php
                                     }
-
+                                 
+     
                             ?>                                               
                             <!-- end condition request -->
                             <!-- gán dữ liệu -->
@@ -228,7 +231,7 @@
                 .then((willDelete) => {
                     if (willDelete) {
                         $.ajax({
-                            url: "contract.php",
+                            url: "contract.php?id_home=<?=$id_homecheck?>",
                             method: "post",
                             data: {
                                 id_home: id_home,
@@ -236,10 +239,16 @@
                                 action: action
                             },
                             success: function(dt) {
-                                swal("Gửi yêu cầu đặt cọc thành công!", {
+                                if(dt = "success"){
+                                    swal("Gửi yêu cầu đặt cọc thành công!", {
                                     icon: "success",                              
                                     footer:  '<a href="index_home.php">Quay trở lại trang chủ</a>'
                                 });
+                                }else 
+                                if(dt =="fail"){
+                                    alert("fail")
+                                }
+                                
                                 $(".insert").html(dt)
                             }
                         })
@@ -251,4 +260,4 @@
 
      
     })
-</script>      
+</script>     

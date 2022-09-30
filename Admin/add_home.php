@@ -105,14 +105,19 @@ include('header.php');
                     $image_name5 = "home_default.jpg";
                 }
 
-                $sql1 = "INSERT INTO tb_home(id_typeHome, name_home, price, priceSale, area_home, address_home, numberRoom, numberBedRoom, numberBathRoom, description, image1, image2, image3, image4, image5, status)
+                $sql1 = "INSERT INTO tb_home(id_typeHome, name_home, price, priceSal    e, area_home, address_home, numberRoom, numberBedRoom, numberBathRoom, description, image1, image2, image3, image4, image5, status)
                                 VALUES($id_typeHome, '$nameHome', '$price', '$sale', '$area','$address',  '$room', '$bed', '$bath', '$des', '$image_name', '$image_name2', '$image_name3', '$image_name4', '$image_name5', 1)";
-
+                if(empty($id_typeHome) || empty($nameHome) || empty($price) || empty($sale) || empty($area) || empty($address) || empty($room) || empty($bed) || empty($bath) || empty($image_name) || empty($image_name2) || empty($image_name3)){
+                    $empty ?><h2 style="color:red" >Vui lòng nhập đầy đủ thông tin</h2><?php
+                }
+                
+                else{
                 $res1 = mysqli_query($conn, $sql1);
                 if ($res1 == TRUE) {
                     header("Location:home.php");
                 } else {
                     header("Location:add_home.php");
+                }
                 }
             }
         ?>

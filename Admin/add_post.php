@@ -29,7 +29,10 @@ include('header.php');
                 } else {
                     $image_name = "post_default.jpg";
                 }
-
+                if(empty($content) || empty($title)){
+                    $empty ?><h2 style="color:red" >Vui lòng nhập đầy đủ thông tin</h2><?php
+                }
+                else {
                 $sql1 = "INSERT INTO tb_post(postTitle, postContent, idWriter, img_post, status)
                         VALUES('$title', '$content', $id_admin, '$image_name', 1)";
                 $res1 = mysqli_query($conn, $sql1);
@@ -39,6 +42,7 @@ include('header.php');
 
                     header("Location:add_post.php");
                 }
+            }
             }
         ?>
         <div class="inputBox">

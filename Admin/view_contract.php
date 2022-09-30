@@ -59,6 +59,10 @@ include('header.php');
         <?php
         if (isset($_POST['submit'])) {
             $request = $_POST['note'];
+            if(empty($request)){
+                $empty ?><h2 style="color:red" >Vui lòng nhập đầy đủ thông tin</h2><?php
+            }
+            else{
             $sql4 = "UPDATE tb_contract SET note = '$request' Where id_contract = $id_contract";
             $res4 = mysqli_query($conn, $sql4);
             if ($res4 == true) {
@@ -66,6 +70,7 @@ include('header.php');
             } else {
                 header("Location:view_contract.php");
             }
+        }
         }
 
         ?>
